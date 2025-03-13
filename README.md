@@ -162,3 +162,138 @@ npm run reset-project
 ---
 
 This Markdown file is now **properly formatted, well-structured, and includes additional explanations**. 🚀
+
+
+
+## EAS CLI
+
+- its a tool that can be used to fasten development
+
+```sh
+npm install -g eas-cli
+```
+
+## Expo Doctor
+
+- its is used to debugg 
+```sh
+npx expo-doctor
+```
+
+## Expo router 
+
+- it helps us manage routing in our react-native app any file under app becomes a route
+
+### _Layout file
+
+- it contains the basic structure of an app window stack
+
+### stack navigator
+
+- it helps us navigate between different screens and navigation history
+- we use **Link** to navigate between screens in react-native
+- we export link from expo-router
+
+
+
+
+```js
+import { Link } from 'expo-router';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Home</Text>
+      <Link href="/details">View details</Link>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+```
+
+#### link
+- we can use link to route dynamic links by adding query parameter or statically or use href object
+- lets target it statically
+
+```js
+import { Link } from 'expo-router';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Home</Text>
+      <Link href="/details/1">View first user details</Link>
+      <Link href="/details/2">View second user details</Link>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+```
+
+- You can also use the href object to provide a pathname which takes the value of the dynamic route and passes params
+
+```js
+import { Link } from 'expo-router';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Home</Text>
+      <Link
+        href={{
+          pathname: '/details/[id]',
+          params: { id: 'bacon' },
+        }}>
+        View user details
+      </Link>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+```
+
+### accessparameters from dynamic segments
+
+- we can do this by using useLocalSearchParams() hook that returns url parameter for the selected route
+
+
+## Group
+
+- its files with a similar layout and are placed inside the parethesis (group)
+
+## Tab navigator
+
+- help navigate between screens using bottom tab bar
+
+## +not-found file
+
+- help create a file to handle 404 routes
+
+## Dynamic Routes
+
+- this enable match dynamic routes with dynamic segments embedded in the url
+- we can creat it by wrapping file in square brackets eg [id].tsx
