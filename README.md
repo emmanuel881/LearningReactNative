@@ -281,6 +281,7 @@ const styles = StyleSheet.create({
 - we can do this by using useLocalSearchParams() hook that returns url parameter for the selected route
 
 
+
 ## Group
 
 - its files with a similar layout and are placed inside the parethesis (group)
@@ -297,3 +298,118 @@ const styles = StyleSheet.create({
 
 - this enable match dynamic routes with dynamic segments embedded in the url
 - we can creat it by wrapping file in square brackets eg [id].tsx
+
+## Stack 
+
+- its how we navigate in react native between routes and it animates on top of the screen
+- we can configure routes statically using `<Stack.Screen name={routeName} />` or `navigation.setOptions()`
+
+```js
+import { Stack } from 'expo-router';
+
+export default function Layout() {
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
+      {/* Optionally configure static options outside the route.*/}
+      <Stack.Screen name="home" options={{}} />
+    </Stack>
+  );
+}
+```
+
+```js
+import { Stack, useNavigation } from 'expo-router';
+import { Text, View } from 'react-native';
+import { useEffect } from 'react';
+
+export default function Home() {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+```
+
+## configuring header bar 
+
+we can use the **screenOptions** prop in Stack 
+
+```js
+import { Stack } from 'expo-router';
+
+export default function Layout() {
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    />
+  );
+}
+```
+
+## set screen options
+
+- we can use ` imperative API's router.setParams()` to configure dynamic routes 
+
+## custom push behaviour
+
+- React-native prevent pushing duplicate screens on navigation stack. This can be overwritten
+by using `getId()` in `<Stack.Screen>` 
+- its useful for profile pages, chat screens, or any screen requiring multiple instances.
+
+## Removing stack screens
+
+- we can use `router.back()` or `router.dismiss()` to remove screen from the navigation stack.
+
+###  back vs dismiss 
+- Back vs. Dismiss
+
+    - Back (router.back())
+        - Goes back one step in the navigation history.
+        - Works only within the current navigator.
+        - If you have nested navigators, calling back() will only affect the inner navigator.
+
+    - Dismiss (router.dismiss())
+        - Removes the current screen from the closest stack.
+        - If it's the only screen in the stack, the whole stack will be dismissed.
+        - Works across nested navigators and removes multiple screens if necessary.
+        - You can pass a number to dismiss multiple screens at once.
+
+```js
+import { useRouter } from 'expo-router';
+import { View, Text, Button } from 'react-native';
+
+export default function DetailsScreen() {
+  const router = useRouter();
+
+  return (
+    <View>
+      <Text>Details Screen</Text>
+      <Button title="Dismiss Screen" onPress={() => router.dismiss()} />
+    </View>
+  );
+}
+```
