@@ -413,3 +413,154 @@ export default function DetailsScreen() {
   );
 }
 ```
+
+## dismissTo 
+
+- it removes multiple screen until a specif route has reached
+- if route doesn't exist it pushes it on to the stack
+
+```js 
+import { useRouter } from 'expo-router';
+import { View, Text, Button } from 'react-native';
+
+export default function AboutScreen() {
+  const router = useRouter();
+
+  return (
+    <View>
+      <Text>About Screen</Text>
+      <Button title="Go back to Home" onPress={() => router.dismissTo('/home')} />
+    </View>
+  );
+}
+```
+
+## dismissAll 
+
+- it returns to the first screen of the closest stack
+
+## canDismiss
+
+- check if we can dismiss the current route and returns a boolean
+
+```js
+import { Button, View } from 'react-native';
+
+import { useRouter } from 'expo-router';
+
+
+export default function Settings() {
+  const router = useRouter();
+
+  const handleDismiss = (count: number) => {
+    if (router.canDismiss()) {
+      router.dismiss(count)
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Maybe dismiss" onPress={() => handleDismiss()} />
+    </View>
+  );
+}
+```
+
+## tabs Dynamic routes
+
+You can use a dynamic route in a tab bar. For example, you have a [user] tab that shows a user's profile. You can use the href option to link to a specific user's profile.
+
+```js
+import { Tabs } from 'expo-router';
+
+export default function TabLayout() {
+  return (
+    <Tabs>
+      <Tabs.Screen
+        {/* Name of the dynamic route.*/}
+        name="[user]"
+        options={{
+          {/* Ensure the tab always links to the same href.*/}
+          href: '/evanbacon',
+          {/* OR you can use the href object.*/}
+          href: {
+            pathname: '/[user]',
+            params: {
+              user: 'evanbacon',
+            },
+          },
+        }}
+      />
+    </Tabs>
+  );
+}
+```
+
+## Drawer
+
+- Drawer navigation is a navigation pattern in React Native that provides a side menu (or sliding menu). It allows users to swipe from the left (or tap a button) to open a menu containing navigation options.
+- we install it by runnig the command 
+
+```sh
+npx expo install @react-navigation/drawer react-native-gesture-handler react-native-reanimated
+```
+## Modals 
+- they are mostly used for prompts since they display over the current screen.(used as routes within an existing stack)
+common uses are:
+  - independent tasks that don't need to be part of the navigation
+  - alerts and confirmation dialogs
+
+## react native reanimated
+
+## modal presentation options
+
+## shared routes 
+
+- it enable use to reuse the same screen across different layouts or tabs while maintaining a single URL structure.
+- this helps us not to duplicate files on different routes 
+
+## custom tab layout
+
+### expo-router/ui
+
+
+## Using tailwind on React native
+
+- install tailwind 
+```sh
+npm install nativewind tailwindcss
+```
+
+- create a **tailwind.config.js** with the command 
+
+```sh
+npx tailwindcss init
+```
+
+- configure the file to look like this ...
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./App.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}", "./screens/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+- if you don't have it create a **babel.config.js** file  then configure it this way 
+
+```js 
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ["babel-preset-expo"],
+    plugins: [
+      "expo-router/babel"
+    ],
+  };
+};
+
+```
