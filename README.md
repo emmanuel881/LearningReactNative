@@ -592,10 +592,14 @@ module.exports = withNativeWind(config, { input: './global.css' })
 - now import the file into the main layout
 
 ```js
-import "cssfilenamedirectoty"
+import "./global.css"
 
-- if you are experiencing trouble with classnames you can add this file onto the root . name : ```nativewind-env.d.ts```
+- if you are experiencing trouble with classnames you can add this file onto the root . name : 
+
+```nativewind-env.d.ts```
+
 - paste this into it 
+
 ```ts
 /// <reference types="nativewind/types" />
 
