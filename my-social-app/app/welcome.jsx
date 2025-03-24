@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, StyleSheet, Image } from 'react-native'
+import { View, Text, StatusBar, StyleSheet, Image, Pressable } from 'react-native'
 import React from 'react'
 import ScreenWrapper from "@/components/ScreenWrapper"
 import { hp, wp } from "@/helpers/common"
@@ -21,6 +21,14 @@ const Welcome = () => {
                 {/* footer */}
                 <View style={styles.footer}>
                     <Button title="Getting Started" />
+                </View>
+                <View style={styles.bottomTextContainer}>
+                    <Text style={styles.loginText}>Already have an account ?</Text>
+                    <Pressable>
+                        <Text style={[styles.loginText, { color: theme.colors.primary, fontWeight: theme.fonts.semiBold }]}>
+                            Login
+                        </Text>
+                    </Pressable>
                 </View>
             </View>
         </ScreenWrapper>
@@ -55,6 +63,17 @@ const styles = StyleSheet.create({
     footer: {
         gap: 30,
         width: "100%"
+    },
+    bottomTextContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 5
+    },
+    loginText: {
+        textAlign: "center",
+        color: theme.colors.text,
+        fontSize: hp(1.6)
     }
 })
 
