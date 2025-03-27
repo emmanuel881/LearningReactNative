@@ -35,7 +35,12 @@ const Signup = () => {
         const { data: { session }, error } = await supabase.auth.signUp({
 
             email: email,
-            password: password
+            password: password,
+            options: {
+                data: {
+                    name
+                }
+            }
         })
 
         setLoading(false)
@@ -120,7 +125,7 @@ const styles = StyleSheet.create({
         color: theme.colors.text
     },
     footer: {
-        direction: "row",
+        flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
         gap: 5
