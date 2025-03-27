@@ -9,6 +9,7 @@ import { theme } from '@/constants/theme'
 import Input from '@/components/input'
 import Icon from '@/assets/icons'
 import Button from '@/components/Button'
+import { supabase } from '@/lib/superbase'
 
 
 const Login = () => {
@@ -18,8 +19,26 @@ const Login = () => {
     const [loading, setLoading] = useState(false)
 
     const onSubmit = async () => {
-        if (!emailRef || !passwordRef) {
+        if (!emailRef.trim() || !passwordRef.trim()) {
             Alert.alert("please fill in all the fields!")
+        }
+
+        const email = emailRef.trim()
+        const password = passwordRef.trim()
+
+        setLoading(true)
+
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        })
+
+        setLoading(false)
+
+        console.log("error......:", error)
+
+        if (error) {
+            Alert.alert("login", error.message)
         }
     }
 
