@@ -1,0 +1,2 @@
+export const supabaseUrl = "https://nuzdpcvlahnmsquegktp.supabase.co"
+export const supabaseAnonnKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51emRwY3ZsYWhubXNxdWVna3RwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5NzM5MDUsImV4cCI6MjA1ODU0OTkwNX0.K3sVxlTBlW9Ah2oBnRK__NtG6uA23la6S0sdurtM8nc"
