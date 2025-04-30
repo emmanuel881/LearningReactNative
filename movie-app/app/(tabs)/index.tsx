@@ -38,7 +38,7 @@ export default function Index() {
           <View className="flex-1 mt-5">
             <SearchBar onPress={() => { router.push("/search") }} placeholder="Search for a movie" />
             <View>
-              <Text className="text-lg text-white font-bold mt-5 mb-3 "> latest movies</Text>
+              <Text className="text-lg text-white font-bold mt-5 mb-3 "> Trending movies</Text>
             </View>
 
             <FlatList
@@ -50,7 +50,7 @@ export default function Index() {
               numColumns={3}
               columnWrapperStyle={{
                 justifyContent: "flex-start",
-                gap: 20,
+                gap: 18,
                 paddingRight: 5,
                 marginBottom: 10
               }}
