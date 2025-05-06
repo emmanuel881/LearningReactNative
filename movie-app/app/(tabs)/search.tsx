@@ -6,6 +6,7 @@ import { fetchMovies } from '@/services/api'
 import useFetch from '@/services/useFetch'
 import { icons } from '@/constants/icons'
 import SearchBar from '@/components/SearchBar'
+import { updateSearchCount } from '@/services/appwrite'
 
 const Search = () => {
 
@@ -21,6 +22,10 @@ const Search = () => {
             (async () => {
                 if (searchQuery.trim()) {
                     await loadMovies()
+
+                    if (movies?.length > 0 && movies?.[0]) {
+                        await updateSearchCount(searchQuery, movies[0])
+                    }
                 } else {
                     reset()
                 }
@@ -37,7 +42,8 @@ const Search = () => {
             <FlatList
                 data={movies}
                 renderItem={({ item }) => <MovieCard {...item} />}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
+
                 className='px-5'
                 numColumns={3}
                 columnWrapperStyle={{
