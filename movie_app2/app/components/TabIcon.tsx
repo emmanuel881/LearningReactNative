@@ -3,6 +3,7 @@ import { IconProps } from "phosphor-react-native"
 import React from "react"
 import { ImageBackground, Text, View } from "react-native"
 
+
 type TabIconProps = {
     label: string
     Icon: React.FC<IconProps>
@@ -14,11 +15,11 @@ const TabIcon: React.FC<TabIconProps> = ({ label, Icon, focused }) => {
         return (
             <ImageBackground
                 source={images.highlight}
-                className="flex flex-row w-full flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden"
+                className="flex flex-col w-full flex-1 min-w-[95px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden"
                 imageStyle={{ borderRadius: 999 }}
             >
                 <Icon />
-                <Text className="text-base text-secondary font-semibold ml-2">
+                <Text className="text-[13px] text-textColor font-semibold ml-2">
                     {label}
                 </Text>
             </ImageBackground>
