@@ -21,7 +21,7 @@ export default function Search() {
                 await loadMovies()
 
             }
-        }, 600)
+        }, 500)
 
         return () => clearTimeout(timeout)
 
