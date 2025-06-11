@@ -1,20 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
+import { dummyPosts } from '@/dummyData';
+import PostList from '../components/PostList';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text className='text-3xl text-red-600'>Hello world</Text>
-      <StatusBar style="auto" />
-    </View>
+    <FlatList
+      data={dummyPosts}
+      renderItem={({ item }) => <PostList post={item} />}
+      keyExtractor={(item) => item.id}
+    />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
